@@ -37,7 +37,7 @@ public class Main {
         return (double) sumEltsFromArray(array) / array.length;
     }
 
-    public static void main() {
+    public static void main(String[] args) {
         Integer[] arr = new Integer[] {20, 1};
         System.out.println(maxEltFromArray(arr));
         System.out.println(minEltFromArray(arr));
