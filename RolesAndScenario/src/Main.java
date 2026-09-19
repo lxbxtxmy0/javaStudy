@@ -1,4 +1,4 @@
-import java.util.Arrays;
+
 
 public class Main {
     static String[] roles = {
@@ -18,16 +18,16 @@ public class Main {
 
     static private String printTextPerRole(String[] roles, String[] textLines) {
         String result = "";
-        for (String role : roles) {
-            result += role + "\n";
-            int count = 1;
-            for (String line : textLines) {
-                if (line.contains(role)) {
-                    result += count + ")" + line.substring(role.length() + 1) + "\n";
-                    count += 1;
+        for (int i = 0; i < roles.length; i++) {
+            result += roles[i] + ":\n";
+            for (int j = 0; j < textLines.length; j++) {
+                if (textLines[j].startsWith(roles[i] + ":")) {
+                    result += j + 1 + ")" + textLines[j].substring(roles[i].length() + 1) + "\n";
                 }
             }
-            result += "\n";
+            if (i < roles.length - 1) {
+                result += "\n";
+            }
         }
 
         return result;
