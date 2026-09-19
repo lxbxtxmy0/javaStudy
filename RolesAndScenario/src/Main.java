@@ -1,5 +1,3 @@
-
-
 public class Main {
     static String[] roles = {
             "Городничий", "Аммос Федорович",
@@ -17,20 +15,19 @@ public class Main {
     };
 
     static private String printTextPerRole(String[] roles, String[] textLines) {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (int i = 0; i < roles.length; i++) {
-            result += roles[i] + ":\n";
+            result.append(roles[i] + ":\n");
             for (int j = 0; j < textLines.length; j++) {
                 if (textLines[j].startsWith(roles[i] + ":")) {
-                    result += j + 1 + ")" + textLines[j].substring(roles[i].length() + 1) + "\n";
+                    result.append(j + 1 + ") " + textLines[j].substring(roles[i].length() + 2) + "\n");
                 }
             }
             if (i < roles.length - 1) {
-                result += "\n";
+                result.append("\n");
             }
         }
-
-        return result;
+        return result.toString();
     }
 
     public static void main(String[] args) {
