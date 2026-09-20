@@ -1,78 +1,26 @@
+//Шифратор и дешифратор Цезаря
+//Цель: Создать программу, которая берет текстовое сообщение и «сдвигает» каждую букву на определенное количество позиций
+// в алфавите, а затем умеет возвращать текст в исходное состояние.
+
+//Ключевые функции: Пользователь задает сдвиг (число) и текст. Программа разбивает текст на массив символов (char[]),
+// математически сдвигает каждый символ по таблице Unicode и собирает обратно.
+// Должна корректно обрабатывать пробелы и знаки препинания (оставлять их как есть).
+
+//Какие новые концепции можно потрогать: Арифметика символов (например, char c = 'a' + 3), явное и неявное приведение
+// типов между int и char, использование статических методов класса Character
+// (например, Character.isLetter(), Character.isUpperCase()).
+
 public class Main {
-    private static char[] fromStringToCharArray(String text) {
-        int length = text.length();
-
-        char[] result = new char[length];
-        for (int i = 0; i < length; i++) {
-            result[i] = text.charAt(i);
-        }
-
-        return result;
-    }
-
-    private static String fromCharArrayToString(char[] text) {
-        int length = text.length;
-
-        StringBuilder result = new StringBuilder();
-        for (int i = 0; i < length; i++) {
-            result.append(text[i]);
-        }
-
-        return result.toString();
-    }
-
-    public static String coder(String text, int shift) {
-        char[] symbols = fromStringToCharArray(text);
-
-        for (int i = 0; i < symbols.length; i++) {
-            if (Character.isLetter(symbols[i])) {
-                if ('A' <= symbols[i] && symbols[i] <= 'Z') {
-                    symbols[i] = (char) ((symbols[i] - 'A' + (shift % 26) + 26) % 26 + 'A');
-                } else if ('a' <= symbols[i] && symbols[i] <= 'z') {
-                    symbols[i] = (char) ((symbols[i] - 'a' + (shift % 26) + 26) % 26 + 'a');
-                } else if ('А' <= symbols[i] && symbols[i] <= 'Я') {
-                    symbols[i] = (char) ((symbols[i] - 'А' + (shift % 32) + 32) % 32 + 'А');
-                } else if ('а' <= symbols[i] && symbols[i] <= 'я') {
-                    symbols[i] = (char) ((symbols[i] - 'а' + (shift % 32) + 32) % 32 + 'а');
-                }
-            }
-        }
-
-        return fromCharArrayToString(symbols);
-    }
-
-    public static String decoder(String text, int shift) {
-        char[] symbols = fromStringToCharArray(text);
-
-        for (int i = 0; i < symbols.length; i++) {
-            if (Character.isLetter(symbols[i])) {
-                if ('A' <= symbols[i] && symbols[i] <= 'Z') {
-                    symbols[i] = (char) ((symbols[i] - 'A' - (shift % 26) + 26) % 26 + 'A');
-                } else if ('a' <= symbols[i] && symbols[i] <= 'z') {
-                    symbols[i] = (char) ((symbols[i] - 'a' - (shift % 26) + 26) % 26 + 'a');
-                } else if ('А' <= symbols[i] && symbols[i] <= 'Я') {
-                    symbols[i] = (char) ((symbols[i] - 'А' - (shift % 32) + 32) % 32 + 'А');
-                } else if ('а' <= symbols[i] && symbols[i] <= 'я') {
-                    symbols[i] = (char) ((symbols[i] - 'а' - (shift % 32) + 32) % 32 + 'а');
-                }
-            }
-        }
-
-        return fromCharArrayToString(symbols);
-    }
-
     public static void main(String[] args) {
-        String mode = args[0];
-        String message = args[1];
-        int shift = Integer.parseInt(args[2 ]);
+        CaesarCipher tools = new CaesarCipher();
 
-        String chiper = "";
-        if (mode.equals("code")) {
-            chiper = coder(message, shift);
-        } else if (mode.equals("decode")) {
-            chiper = decoder(message, shift);
-        }
+        String text = "abcd";
+        int shift = 15;
 
-        System.out.println(chiper);
+        String coded = tools.code(text, shift);
+        System.out.println(coded);
+
+        String decoded = tools.decode(coded, shift);
+        System.out.println(decoded);
     }
 }

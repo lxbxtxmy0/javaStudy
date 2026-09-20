@@ -1,25 +1,23 @@
+//Универсальный конвертер физических величин
+//Цель: Написать утилиту для перевода валют или физических единиц измерения
+// (Цельсий в Фаренгейты, километры в мили, байты в мегабайты) с упором на точность данных.
+
+//Ключевые функции: Хранение коэффициентов конверсии в массивах.
+// Программа должна принимать значения в виде строк, преобразовывать их в числа,
+// выполнять расчеты и выводить результат с разной степенью точности (например, точное значение и округленное до целого).
+
+//Какие новые концепции можно потрогать: Потеря точности и отсечение дробной части при сужающем преобразовании
+// (каст из double в float или int), использование классов-оберток для превращения строк в числа
+// (Double.parseDouble(), Integer.valueOf()), знакомство с предельными значениями типов через константы оберток
+// (например, Integer.MAX_VALUE).
+
 class Main {
-    public static double convertFromCtoF(double degrees) {
-        return degrees * 1.8 + 32;
-    }
-
-    public static double convertFromFtoC(double degrees) {
-        return (degrees - 32) / 1.8;
-    }
-
     public static void main(String[] args) {
-        double degrees = Double.parseDouble(args[0]);
-        String kindOfDegrees = args[1];
+        UtilConverter tools = new UtilConverter();
 
-        double result;
-        if (kindOfDegrees.equals("C")) {
-            result = convertFromCtoF(degrees);
-        } else if (kindOfDegrees.equals("F")){
-            result = convertFromFtoC(degrees);
-        } else {
-            System.out.println("Ошибка: введена неизвестная шкала. Используйте C или F.");
-            return;
-        }
+        double degrees = 14.5;
+
+        double result = tools.convertFromCtoF(degrees);
 
         int truncatedResult = (int) result;
 

@@ -1,80 +1,23 @@
-import java.util.Random;
+//Генератор и валидатор надежных паролей
+//Цель: Утилита, которая оценивает надежность введенного пароля,
+// а также может сгенерировать новый пароль по заданным правилам.
+
+//Ключевые функции: Проверка массива символов на соответствие критериям
+// (минимум 8 символов, наличие заглавных букв, строчных букв, цифр).
+// Хранение "словарей" допустимых символов в виде двумерного
+// массива char[][] (одна строка массива — буквы, другая — цифры, третья — спецсимволы) для генерации.
+
+//Какие новые концепции можно потрогать:
+// Глубокое изучение методов класса Character (isDigit(), isLowerCase(), isWhitespace()),
+// работа с одномерными и двумерными массивами примитивов, особенности инициализации массивов.
 
 public class Main {
-    static char[][] dictionary = {
-            "abcdefghijklmnopqrstuvwxyz".toCharArray(),
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray(),
-            "0123456789".toCharArray(),
-            "!@#$%^&*()-_=+".toCharArray()
-    };
-
-    public static boolean contains(char symbol, char[] dictionary) {
-        for (int i = 0; i < dictionary.length; i++) {
-            if (dictionary[i] == symbol) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static boolean isCorrectPassword(String password) {
-        if (password.length() < 8) {
-            return false;
-        }
-
-        boolean hasUpperCase = false;
-        boolean hasLowerCase = false;
-        boolean hasDigit = false;
-        boolean hasSpecialSymbol = false;
-
-        for (int i = 0; i < password.length(); i++) {
-            if (contains(password.charAt(i), dictionary[1])) {
-                hasUpperCase = true;
-            } else if (contains(password.charAt(i), dictionary[0])) {
-                hasLowerCase = true;
-            } else if (contains(password.charAt(i), dictionary[2])) {
-                hasDigit = true;
-            } else if (contains(password.charAt(i), dictionary[3])) {
-                hasSpecialSymbol = true;
-            }
-        }
-
-        return hasUpperCase && hasLowerCase && hasDigit && hasSpecialSymbol;
-    }
-
-    public static String generatePassword(int length) {
-        if (length < 8) {
-            return null;
-        }
-
-        Random random = new Random();
-
-        StringBuilder password = new StringBuilder();
-
-        password.append(dictionary[0][random.nextInt(dictionary[0].length)]);
-        password.append(dictionary[1][random.nextInt(dictionary[1].length)]);
-        password.append(dictionary[2][random.nextInt(dictionary[2].length)]);
-        password.append(dictionary[3][random.nextInt(dictionary[3].length)]);
-
-        for (int i = 0; i < length - 4; i++) {
-            int row = random.nextInt(dictionary.length);
-            int column = random.nextInt(dictionary[row].length);
-            password.append(dictionary[row][column]);
-        }
-        System.out.println(password.toString());
-        for (int i = 0; i < length; i++) {
-            char temp = password.charAt(i);
-            int randomPosition = random.nextInt(length);
-            password.setCharAt(i, password.charAt(randomPosition));
-            password.setCharAt(randomPosition, temp);
-        }
-        System.out.println(password.toString());
-
-
-        return password.toString();
-    }
-
     public static void main(String[] args) {
-        generatePassword(11);
+        PasswordValidator tools = new PasswordValidator();
+
+        String password = tools.generatePassword(11);
+
+        System.out.println(password);
+        System.out.println(tools.isCorrectPassword(password));
     }
 }
