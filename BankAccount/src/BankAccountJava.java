@@ -1,64 +1,70 @@
 public class BankAccountJava {
-    public static final double MIN_DEPOSIT = 10.0;
 
-    private static int accountsCount = 0;
+    private final double MIN_DEPOSIT = 10.0;
 
-    public static int getAccountsCount() {
-        return accountsCount;
-    }
-
+    private static int accountsCount;
 
     private final String id;
     private double balance;
-    private boolean active = true;
+    private boolean active;
 
-    public String getId() {
-
-        return this.id;
-    }
-
-    public double getBalance() {
-        return this.balance;
-    }
-
-    public boolean getStatus() {
-        return this.active;
-    }
-
-    public BankAccountJava(double balance) {
-        this.id = "ACC-" + accountsCount;
-        accountsCount += 1;
-
+    public BankAccountJava(String id, double balance) {
+        this.id = id;
         if (balance >= 0) {
             this.balance = balance;
         } else {
             this.balance = 0.0;
         }
+        this.active = true;
+        accountsCount += 1;
     }
 
     public BankAccountJava() {
-        this(0);
+        this("ACC-" + (accountsCount + 1), 0);
     }
 
-    public boolean addBalance(double amount) {
-        if (!this.active || amount < MIN_DEPOSIT) {
-            return false;
+    public static int getAccountsCount() {
+        return accountsCount;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public boolean topUpBalance(double amount) {
+        if (isActive() && amount >= MIN_DEPOSIT) {
+            balance += amount;
+            return true;
         }
-
-        this.balance += amount;
-        return true;
+        return false;
     }
 
-    public boolean subBalance(double amount) {
-        if (!this.active || amount < 0 || this.balance - amount < 0) {
-            return false;
+    public boolean withdrawFromBalance(double amount) {
+        if (isActive() && amount > 0 && balance - amount >= 0) {
+            balance -= amount;
+            return true;
         }
-
-        this.balance -= amount;
-        return true;
+        return false;
     }
 
-    public void switchStatus() {
-        this.active = !this.active;
+    @Override
+    public String toString() {
+        return "BankAccountJava{" +
+                "id='" + id + '\'' +
+                ", balance=" + balance +
+                ", active=" + active +
+                '}';
     }
 }
