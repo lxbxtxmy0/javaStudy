@@ -1,7 +1,10 @@
 package org.example;
 
-sealed abstract public class AbstractVector implements Vector permits Vec2, Vec3, VecN {
+abstract public class AbstractVector {
     final private double epsilon = 1e-9;
+
+    abstract public double component(int n);
+    abstract public int bitDepth();
 
     public double length() {
         int bitDepth = bitDepth();
@@ -15,7 +18,7 @@ sealed abstract public class AbstractVector implements Vector permits Vec2, Vec3
     }
 
 
-    public Vector plus(Vector other) {
+    public AbstractVector plus(AbstractVector other) {
         int bitDepth = bitDepth();
         if (bitDepth != other.bitDepth()) {
             throw new IllegalArgumentException("Нельзя складывать векторы разных разрядностей");
@@ -24,11 +27,11 @@ sealed abstract public class AbstractVector implements Vector permits Vec2, Vec3
 
         if (bitDepth == 2) {
             return new Vec2(component(0) + other.component(0),
-                            component(1) + other.component(1));
+                    component(1) + other.component(1));
         } else if (bitDepth == 3) {
             return new Vec3(component(0) + other.component(0),
-                            component(1) + other.component(1),
-                            component(2) + other.component(2));
+                    component(1) + other.component(1),
+                    component(2) + other.component(2));
         } else {
             double[] coords = new double[bitDepth];
             for (int i = 0; i < bitDepth; i++) {
@@ -39,7 +42,7 @@ sealed abstract public class AbstractVector implements Vector permits Vec2, Vec3
         }
     }
 
-    public Vector sub(Vector other) {
+    public AbstractVector sub(AbstractVector other) {
         int bitDepth = bitDepth();
 
         if (bitDepth != other.bitDepth()) {
@@ -64,7 +67,7 @@ sealed abstract public class AbstractVector implements Vector permits Vec2, Vec3
         }
     }
 
-    public Vector mulOnDigit(double n) {
+    public AbstractVector mulOnDigit(double n) {
         int bitDepth = bitDepth();
         if (bitDepth == 2) {
             return new Vec2(component(0) * n, component(1) * n);
@@ -80,7 +83,7 @@ sealed abstract public class AbstractVector implements Vector permits Vec2, Vec3
         }
     }
 
-    public double dotProduct(Vector other) {
+    public double dotProduct(AbstractVector other) {
         int bitDepth = bitDepth();
 
         if (bitDepth != other.bitDepth()) {
@@ -95,7 +98,7 @@ sealed abstract public class AbstractVector implements Vector permits Vec2, Vec3
         return result;
     }
 
-    public Vector normalize() {
+    public AbstractVector normalize() {
         int bitDepth = bitDepth();
         double length = length();
 
@@ -113,7 +116,7 @@ sealed abstract public class AbstractVector implements Vector permits Vec2, Vec3
         }
     }
 
-    public double angleBetweenVector(Vector other) {
+    public double angleBetweenVector(AbstractVector other) {
         double dot = dotProduct(other);
         double thisLength = length();
         double thatLength = other.length();
@@ -123,7 +126,7 @@ sealed abstract public class AbstractVector implements Vector permits Vec2, Vec3
         return Math.toDegrees(Math.acos(cosBetweenVectors));
     }
 
-    public boolean isCollinearWith(Vector other) {
+    public boolean isCollinearWith(AbstractVector other) {
         if (bitDepth() != other.bitDepth()) {
             throw new IllegalArgumentException("Нельзя складывать векторы разных разрядностей");
         }
@@ -133,7 +136,7 @@ sealed abstract public class AbstractVector implements Vector permits Vec2, Vec3
         return Math.abs(angle - 180) < epsilon || Math.abs(angle - 0) < epsilon || Math.abs(angle + 180) < epsilon;
     }
 
-    public boolean isOrthogonalWith(Vector other) {
+    public boolean isOrthogonalWith(AbstractVector other) {
         if (bitDepth() != other.bitDepth()) {
             throw new IllegalArgumentException("Нельзя складывать векторы разных разрядностей");
         }
@@ -147,7 +150,7 @@ sealed abstract public class AbstractVector implements Vector permits Vec2, Vec3
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Vector that)) return false;
+        if (!(o instanceof AbstractVector that)) return false;
         if (bitDepth() != that.bitDepth()) return false;
 
         for (int i = 0; i < bitDepth(); i++) {

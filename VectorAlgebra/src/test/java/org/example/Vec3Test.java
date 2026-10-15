@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class Vec3Test {
 
-    Vector v1 = new Vec3(1, 2, 3);
-    Vector v2 = new VecN(1, 2, 4);
+    AbstractVector v1 = new Vec3(1, 2, 3);
+    AbstractVector v2 = new VecN(1, 2, 4);
 
 
     @Test

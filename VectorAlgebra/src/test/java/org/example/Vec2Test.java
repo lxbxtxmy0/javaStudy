@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 class Vec2Test {
-    Vector v1 = new Vec2(1, 2);
-    Vector v2 = new VecN(1, 2);
+    AbstractVector v1 = new Vec2(1, 2);
+    AbstractVector v2 = new VecN(1, 2);
 
 
     @Test
