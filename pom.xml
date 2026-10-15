@@ -11,6 +11,7 @@
     <modules>
         <module>AsciiCharSequence</module>
         <module>TextAnalyzer</module>
+        <module>VectorAlgebra</module>
     </modules>
 
     <properties>
