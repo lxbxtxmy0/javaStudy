@@ -8,6 +8,7 @@
     <artifactId>javaStudy</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+
     <modules>
         <module>AsciiCharSequence</module>
         <module>TextAnalyzer</module>
