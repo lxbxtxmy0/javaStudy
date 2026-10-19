@@ -13,6 +13,7 @@
         <module>AsciiCharSequence</module>
         <module>TextAnalyzer</module>
         <module>VectorAlgebra</module>
+        <module>RingBuffer</module>
     </modules>
 
     <properties>
