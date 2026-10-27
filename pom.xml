@@ -15,6 +15,7 @@
         <module>VectorAlgebra</module>
         <module>RingBuffer</module>
         <module>SpellChecker</module>
+        <module>UndoRedoMechanizm</module>
     </modules>
 
     <properties>
