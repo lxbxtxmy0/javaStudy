@@ -16,6 +16,7 @@
         <module>RingBuffer</module>
         <module>SpellChecker</module>
         <module>UndoRedoMechanizm</module>
+        <module>SyntaxValidator</module>
     </modules>
 
     <properties>
