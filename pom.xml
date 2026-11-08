@@ -17,6 +17,7 @@
         <module>SpellChecker</module>
         <module>UndoRedoMechanizm</module>
         <module>SyntaxValidator</module>
+        <module>MiniMapTasks</module>
     </modules>
 
     <properties>
