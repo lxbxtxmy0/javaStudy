@@ -12,7 +12,7 @@ class IntegerListBinarySearchTest {
     void getIndexOfElement() {
         assertEquals(tool.getIndexOfElement(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6, 7)), 3),
                 2);
-        assertEquals(tool.getIndexOfElement(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6, 7)), -1),
-                null);
+        assertEquals(tool.getIndexOfElement(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6, 7)), -2),
+                -1);
     }
 }

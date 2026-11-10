@@ -2,7 +2,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class IntegerListBinarySearch {
-    public Integer getIndexOfElement(List<Integer> list, int element) {
+    public int getIndexOfElement(List<Integer> list, int element) {
         int bot = 0;
         int top = list.size() - 1;
 
@@ -19,6 +19,6 @@ public class IntegerListBinarySearch {
             }
         }
 
-        return null;
+        return -1;
     }
 }
