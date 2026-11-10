@@ -19,6 +19,7 @@
         <module>SyntaxValidator</module>
         <module>MiniMapTasks</module>
         <module>MarketplaceIndexEngine</module>
+        <module>AlgorithmsTasks</module>
     </modules>
 
     <properties>
