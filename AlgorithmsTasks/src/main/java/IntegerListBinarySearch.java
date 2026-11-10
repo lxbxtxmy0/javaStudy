@@ -3,8 +3,6 @@ import java.util.List;
 
 public class IntegerListBinarySearch {
     public Integer getIndexOfElement(List<Integer> list, int element) {
-        list.sort(Comparator.comparingInt(Integer::valueOf));
-
         int bot = 0;
         int top = list.size() - 1;
 
