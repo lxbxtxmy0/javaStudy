@@ -18,6 +18,7 @@
         <module>UndoRedoMechanizm</module>
         <module>SyntaxValidator</module>
         <module>MiniMapTasks</module>
+        <module>MarketplaceIndexEngine</module>
     </modules>
 
     <properties>
