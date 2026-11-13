@@ -13,6 +13,14 @@
         <module>AsciiCharSequence</module>
         <module>TextAnalyzer</module>
         <module>VectorAlgebra</module>
+        <module>RingBuffer</module>
+        <module>SpellChecker</module>
+        <module>UndoRedoMechanizm</module>
+        <module>SyntaxValidator</module>
+        <module>MiniMapTasks</module>
+        <module>MarketplaceIndexEngine</module>
+        <module>AlgorithmsTasks</module>
+        <module>Calculator</module>
     </modules>
 
     <properties>
