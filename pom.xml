@@ -20,6 +20,7 @@
         <module>MiniMapTasks</module>
         <module>MarketplaceIndexEngine</module>
         <module>AlgorithmsTasks</module>
+        <module>Calculator</module>
     </modules>
 
     <properties>
