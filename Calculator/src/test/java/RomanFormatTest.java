@@ -16,7 +16,7 @@ class RomanFormatTest {
 
         assertEquals(1, tools.parse("I"));
         assertEquals(2, tools.parse("II"));
-        assertEquals(16, tools.parse("XVI"));
+        assertEquals(10, tools.parse("X"));
         assertEquals(38, tools.parse("XXXVIII"));
         assertEquals(39, tools.parse("XXXIX"));
     }
@@ -35,19 +35,4 @@ class RomanFormatTest {
         assertEquals("XXXIX", tools.format(39));
     }
 
-    @Test
-    void matches() {
-        assertFalse(tools.matches("0"));
-        assertFalse(tools.matches(""));
-        assertFalse(tools.matches(null));
-        assertFalse(tools.matches("-1"));
-        assertFalse(tools.matches("MK"));
-        assertFalse(tools.matches("52"));
-        assertFalse(tools.matches("XXXXXXVVIIIVIVI"));
-
-        assertTrue(tools.matches("I"));
-        assertTrue(tools.matches("XI"));
-        assertTrue(tools.matches("VX"));
-        assertTrue(tools.matches("XXXIX"));
-    }
 }

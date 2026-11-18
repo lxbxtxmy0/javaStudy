@@ -1,4 +1,7 @@
 public class Calculator {
+    private final int MIN_VALUE = 1;
+    private final int MAX_VALUE = 39;
+
     private final NumberFormat arabicFormat = new ArabicFormat();
     private final NumberFormat romanFormat = new RomanFormat();
 

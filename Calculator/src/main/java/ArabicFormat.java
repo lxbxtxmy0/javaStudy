@@ -1,33 +1,40 @@
-public class ArabicFormat implements NumberFormat{
+final public class ArabicFormat implements NumberFormat {
+    @Override
     public int parse(String text) {
         if (text == null || text.isEmpty()) {
-            throw new IllegalArgumentException("Неверный формат арабского числа");
+            throw new IllegalArgumentException("Нельзя преобразовать пустоту в число");
         }
 
-        int result = Integer.parseInt(text);
+        int start = text.charAt(0) == '-' ? 1 : 0;
 
-        if (result < MIN_VALUE || result > MAX_VALUE) {
-            throw new IllegalArgumentException("Диапозон значений - [" + MIN_VALUE + ", " + MAX_VALUE + "]");
+        if (start == text.length()) {
+            throw new IllegalArgumentException("После минуса нет цифр: " + text);
         }
 
-        return result;
-    }
-
-    public String format(int number) {
-        if (number < MIN_VALUE || number > MAX_VALUE) {
-            throw new IllegalArgumentException("Диапозон значений - [" + MIN_VALUE + ", " + MAX_VALUE + "]");
+        for (int i = start; i < text.length(); i++) {
+            char ch = text.charAt(i);
+            if (ch < '0' || ch > '9') {
+                throw new IllegalArgumentException("Передано не арабское число: " + text);
+            }
         }
 
-        return Integer.toString(number);
-    }
+        if (text.charAt(start) == '0' && text.length() - start > 1) {
+            throw new IllegalArgumentException("Ведущие нули запрещены: " + text);
+        }
 
-    public boolean matches(String text) {
+        if (start == 1 && text.charAt(1) == '0') {
+            throw new IllegalArgumentException("«Минус ноль» не допускается: " + text);
+        }
+
         try {
-            parse(text);
-        } catch (Exception e) {
-            return false;
+            return Integer.parseInt(text);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Число не помещается в int: " + text, e);
         }
+    }
 
-        return true;
+    @Override
+    public String format(int number) {
+        return Integer.toString(number);
     }
 }
